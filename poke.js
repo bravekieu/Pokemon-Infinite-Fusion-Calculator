@@ -774,13 +774,13 @@ function readURLImage(input) {
                     $('#pic1').attr('src', e.target.result);
                     $('#pic2').attr('src', e.target.result);
                     document.getElementById("pic2").style.filter 
-                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, true, false) + "deg)";
+                        = "hue-rotate(" + calcShinyHue(headId, bodyId, true, false) + "deg)";
                     $('#pic3').attr('src', e.target.result);
                     document.getElementById("pic3").style.filter 
-                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, false, true) + "deg)";
+                        = "hue-rotate(" + calcShinyHue(headId, bodyId, false, true) + "deg)";
                     $('#pic4').attr('src', e.target.result);
                     document.getElementById("pic4").style.filter 
-                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, true, true) + "deg)";
+                        = "hue-rotate(" + calcShinyHue(headId, bodyId, true, true) + "deg)";
                 };
                 reader.readAsDataURL(input.files[0]);
             }
@@ -846,21 +846,17 @@ function showShinies(randomHead, randomBody){
 
     document.getElementById("pic1").src = picShinySrc;
 
-    let hueShift = calcShinyHueNew(headId, bodyId, true, false)
+    let hueShift = calcShinyHue(headId, bodyId, true, false)
     let picShiny = document.getElementById("pic2");
     setShinyImg(picShiny, hueShift);
 
-    hueShift = calcShinyHueNew(headId, bodyId, false, true)
+    hueShift = calcShinyHue(headId, bodyId, false, true)
     picShiny = document.getElementById("pic3");
-    picShiny.src = picShinySrc;
-    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
-    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
+    setShinyImg(picShiny, hueShift);
 
-    hueShift = calcShinyHueNew(headId, bodyId, true, true)
+    hueShift = calcShinyHue(headId, bodyId, true, true)
     picShiny = document.getElementById("pic4");
-    picShiny.src = picShinySrc;
-    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
-    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
+    setShinyImg(picShiny, hueShift);
 
     document.getElementById("button").disabled = false;
     document.getElementById("random").disabled = false;
@@ -877,7 +873,7 @@ function setShinyImg(picShiny, hueShift) {
 
 // Calculates the hue of the shiny and returns it it.
 // This tries to replicate the calculation made in the game itself.
-function calcShinyHueNew(num1, num2, hasShinyHead, hasShinyBody) {
+function calcShinyHue(num1, num2, hasShinyHead, hasShinyBody) {
     let offset = 0;
 
     if (hasShinyHead && hasShinyBody && num1 in shinyColorOffsetsDict && num2 in shinyColorOffsetsDict){
