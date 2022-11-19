@@ -23,6 +23,12 @@ label {
     object-fit: cover;
 }
 
+.picpokShiny {
+    width:  288px;
+    height: 288px;
+    object-fit: cover;
+}
+
 .pictype {
     width: 89px;
     height: 39px;
@@ -53,6 +59,11 @@ h3 {
 .stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+}
+
+.shinies {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 #FP1 {

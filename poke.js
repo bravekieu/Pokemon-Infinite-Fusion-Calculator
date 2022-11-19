@@ -748,6 +748,171 @@ function doesImageExists(imageUrl){
     return http.status != 404;
 }
 
+// Swaps the head with the body and viceversa
+function swapPoke(){
+    let auxId = headId;
+    let auxFname = document.getElementById("fname1").value;
+
+    headId = bodyId;
+    document.getElementById("fname1").value = document.getElementById("fname2").value;
+
+    bodyId = auxId;
+    document.getElementById("fname2").value = auxFname;
+
+    showShinies(false, false);
+}
+
+// Let's you pick a image from your machine
+$("input[id='pic1']").click(function() {
+    $("input[id='input_file']").click();
+});
+function readURLImage(input) {
+    if (typeof headId !== 'undefined' && typeof bodyId !== 'undefined') {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                    $('#pic1').attr('src', e.target.result);
+                    $('#pic2').attr('src', e.target.result);
+                    document.getElementById("pic2").style.filter 
+                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, true, false) + "deg)";
+                    $('#pic3').attr('src', e.target.result);
+                    document.getElementById("pic3").style.filter 
+                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, false, true) + "deg)";
+                    $('#pic4').attr('src', e.target.result);
+                    document.getElementById("pic4").style.filter 
+                        = "hue-rotate(" + calcShinyHueNew(headId, bodyId, true, true) + "deg)";
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+    } else {
+        alert("Please fill the two text inputs!");
+    }
+}
+
+// Shows the images for the mon and it's shinies
+function showShinies(randomHead, randomBody){
+    document.getElementById("input_file").value = ""; // To make the input work everytime
+
+    if (randomHead) {
+        headId = getRandomPokeID();
+        var name = ids[headId][0].toLowerCase();
+        if (nameFix.includes(name)) {
+            name = nameException[nameFix.indexOf(name)];
+        }
+        document.getElementById("fname1").value = name;
+    } else {
+        var name = document.getElementById("fname1").value.toLowerCase();
+        if (nameException.includes(name)) {
+            name = nameFix[nameException.indexOf(name)];
+        }
+        for (let i = 0; i < ids.length; i++) {
+            if (name.toUpperCase() == ids[i][0].toUpperCase()) {
+                headId = i;
+                break;
+            }
+        }
+    }
+
+    if (randomBody) {
+        bodyId = getRandomPokeID();
+        var name2 = ids[bodyId][0].toLowerCase();
+        if (nameFix.includes(name2)) {
+            name2 = nameException[nameFix.indexOf(name2)];
+        }    
+        document.getElementById("fname2").value = name2;
+    } else {
+        var name2 = document.getElementById("fname2").value.toLowerCase();
+        if (nameException.includes(name2)) {
+            name2 = nameFix[nameException.indexOf(name2)];
+        }
+        for (let i = 0; i < ids.length; i++) {
+            if (name2.toUpperCase() == ids[i][0].toUpperCase()) {
+                bodyId = i;
+                break;
+            }
+        }
+    }
+
+    document.getElementById("dexnumber1").innerHTML = (bodyId + 1) * 420 + headId + 1;
+    document.getElementById("fusionid1").innerHTML = " (" + (headId + 1) + "." + (bodyId + 1) + ")"
+    document.getElementById("fusionid1").style.color = "green";
+
+    picShinySrc = "https://raw.githubusercontent.com/Aegide/custom-fusion-sprites/main/CustomBattlers/" + (headId+1) + "." + (bodyId+1) + ".png";
+
+    if (!doesImageExists(picShinySrc)) {
+        picShinySrc = "https://raw.githubusercontent.com/Aegide/autogen-fusion-sprites/master/Battlers/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
+        document.getElementById("fusionid1").style.color = "red";
+    }
+
+    document.getElementById("pic1").src = picShinySrc;
+
+    let hueShift = calcShinyHueNew(headId, bodyId, true, false)
+    let picShiny = document.getElementById("pic2");
+    setShinyImg(picShiny, hueShift);
+
+    hueShift = calcShinyHueNew(headId, bodyId, false, true)
+    picShiny = document.getElementById("pic3");
+    picShiny.src = picShinySrc;
+    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
+
+    hueShift = calcShinyHueNew(headId, bodyId, true, true)
+    picShiny = document.getElementById("pic4");
+    picShiny.src = picShinySrc;
+    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
+
+    document.getElementById("button").disabled = false;
+    document.getElementById("random").disabled = false;
+    document.getElementById("random1").disabled = false;
+    document.getElementById("random2").disabled = false;
+}
+
+function setShinyImg(picShiny, hueShift) {
+    picShiny.src = picShinySrc;
+    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
+}
+
+
+// Calculates the hue of the shiny and returns it it.
+// This tries to replicate the calculation made in the game itself.
+function calcShinyHueNew(num1, num2, hasShinyHead, hasShinyBody) {
+    let offset = 0;
+
+    if (hasShinyHead && hasShinyBody && num1 in shinyColorOffsetsDict && num2 in shinyColorOffsetsDict){
+        offset = shinyColorOffsetsDict[num1] + shinyColorOffsetsDict[num2];
+    } else if (hasShinyHead && num1 in shinyColorOffsetsDict) {
+        offset = shinyColorOffsetsDict[num1]
+    } else if (hasShinyBody && num2 in shinyColorOffsetsDict) {
+        offset = shinyColorOffsetsDict[num2]
+    } else {
+        offset = calcShinyHueDeafult(num1, num2, hasShinyHead, hasShinyBody);
+    }
+
+    return offset;
+}
+
+// Calculates the hue of the shiny and returns it it.
+// This tries to replicate the calculation made in the game itself.
+function calcShinyHueDeafult(num1, num2, hasShinyHead, hasShinyBody) {
+    let dexOffset = num1 + num2 * 420;
+    let dexDiff = Math.abs(num2 - num1);
+
+    if (hasShinyHead && !hasShinyBody) {
+        dexOffset = num1;
+    } else if (!hasShinyHead && hasShinyBody) {
+        dexOffset = dexDiff > 20 ? num2 : num2 + 40
+    }
+
+    offset = dexOffset + 75;
+    if (offset > 420) offset /= 360;
+    if (offset < 40) offset = 40;
+    if (Math.abs(360 - offset) < 40) offset = 40;
+
+    return offset;
+}
+
 
 function fusionAbilities(headAbilities, bodyAbilities) {
     var B0 = bodyAbilities[0][0].name;
