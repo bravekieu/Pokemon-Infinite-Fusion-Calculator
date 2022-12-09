@@ -1,4 +1,4 @@
-//import the library to talk to imagemagick
+// import the library to talk to imagemagick
 import * as Magick from 'https://knicknic.github.io/wasm-imagemagick/magickApi.js';    
 
 // various html elements
@@ -22,10 +22,8 @@ let DoMagickCall = async function () {
 
     let command = [ "convert", "srcFile.png", "-modulate", "100,100," + magickHueShift, "out.png" ];
     let processedFiles = await Magick.Call(files, command);
-    // response can be multiple files (example split)
-    // here we know we just have one
     let firstOutputImage = processedFiles[0];
-    shiftedImage[i].src = URL.createObjectURL(firstOutputImage['blob']);
+    shiftedImage[i].src = URL.createObjectURL(new Blob([firstOutputImage['blob']], { type: "image/png" }));
   }
 }
 
