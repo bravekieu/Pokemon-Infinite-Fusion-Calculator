@@ -791,7 +791,7 @@ function readURLImage(input) {
 
 // Shows the images for the mon and it's shinies
 function showShinies(randomHead, randomBody){
-    document.getElementById("input_file").value = ""; // To make the input work everytime
+    document.getElementById("input_file").value = ""; // To make the input work everytime, even if the input image has not changed
 
     if (randomHead) {
         headId = getRandomPokeID();
@@ -846,30 +846,24 @@ function showShinies(randomHead, randomBody){
 
     document.getElementById("pic1").src = picShinySrc;
 
-    let hueShift = calcShinyHue(headId, bodyId, true, false)
+    window.hueShift = [];
+    hueShift[0] = calcShinyHue(headId, bodyId, true, false)
     let picShiny = document.getElementById("pic2");
-    setShinyImg(picShiny, hueShift);
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift[0]);
 
-    hueShift = calcShinyHue(headId, bodyId, false, true)
+    hueShift[1] = calcShinyHue(headId, bodyId, false, true)
     picShiny = document.getElementById("pic3");
-    setShinyImg(picShiny, hueShift);
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift[1]);
 
-    hueShift = calcShinyHue(headId, bodyId, true, true)
+    hueShift[2] = calcShinyHue(headId, bodyId, true, true)
     picShiny = document.getElementById("pic4");
-    setShinyImg(picShiny, hueShift);
+    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift[2]);
 
     document.getElementById("button").disabled = false;
     document.getElementById("random").disabled = false;
     document.getElementById("random1").disabled = false;
     document.getElementById("random2").disabled = false;
 }
-
-function setShinyImg(picShiny, hueShift) {
-    picShiny.src = picShinySrc;
-    picShiny.style.filter = "hue-rotate(" + hueShift + "deg)";
-    picShiny.title = picShiny.alt = "Hue shift " + Math.trunc(hueShift);
-}
-
 
 // Calculates the hue of the shiny and returns it it.
 // This tries to replicate the calculation made in the game itself.

@@ -5,9 +5,9 @@
         <title>Infinite Fusion Calculator</title>
         <link rel="stylesheet" href="../poke.css">
         <link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@500;600;700&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>    
     </head>
-<body>
+<body>    
     <h1><a href="../index.html" style="text-decoration:none; color:white">Infinite Fusion Calculator</a></h1>
     <h2>Shiny preview</h2>
     <div id="text">
@@ -17,8 +17,7 @@
             Pokémon Infinite Fusion v5!<br>
             This tool was created first by <a href="https://github.com/SDM0">SDM0</a>, then updated by <a
             href="https://github.com/Aegide/Aegide.github.io">Aegide</a>.<br>
-            Shiny preview by <a href="https://github.com/Jokaes">Jokaes</a>. <i>Colors are not exactly the same as in the game.</i><br>
-            The data used is from the game, but is mostly based on generation 5.
+            Shiny preview by <a href="https://github.com/Jokaes">Jokaes</a>.
             <br><br>
             <i>The sprites shown here were mostly made by members of the <a
             href="https://discord.com/invite/2yynWRvBrB">IF Discord</a>,<br>
@@ -27,7 +26,7 @@
         </h4>
         <br>
         <button id="random" class="button" onclick="showShinies(true, true)">Random</button>
-        <button id="reset" class="button" onclick="swapPoke()">Swap ⇆</button>
+        <button id="swap" class="button" onclick="swapPoke()">Swap ⇆</button>
         <div id="t1">
             <label for="fname1">Head:</label>
             <input list="dlPkmn" type="text" id="fname1" name="fname1" value="" autocomplete="off">
@@ -39,7 +38,7 @@
             <button id="random2" class="button" onclick="showShinies(false, true)">R2</button>
         </div>
     </div>
-    <button id="button" class="button" onclick="showShinies(false, false)">Fuse</button>
+    <button id="fuse" class="button" onclick="showShinies(false, false)">Fuse</button>
     </br></br>
     <div>
         <a id="dexnumber1">&nbsp;</a><a id="fusionid1">&nbsp;</a>
@@ -65,7 +64,8 @@
         </div>
     </sector>
     <!--<p id="bottom">All rights reserved to Pokémon</p>-->
+    <script src="../infiniteFusionData.js"></script>
+    <script src="../poke.js"></script>
+    <script type='module' src="shinyModule.js"></script>
 </body>
-<script src="../infiniteFusionData.js"></script>
-<script src="../poke.js"></script>
 </html>
