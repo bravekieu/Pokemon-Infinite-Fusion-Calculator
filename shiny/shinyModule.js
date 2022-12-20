@@ -10,6 +10,7 @@ shiftedImage[2] = document.getElementById('pic4');
 // Fetch the image to hue shifted it, and call image magick
 let DoMagickCall = async function () {
   for (let i = 0; i < 3; i++) {
+    URL.revokeObjectURL(shiftedImage[i].src);
     let fetchedSourceImage = await fetch(document.getElementById("pic1").src);
     let arrayBuffer = await fetchedSourceImage.arrayBuffer();
     let sourceBytes = new Uint8Array(arrayBuffer);
