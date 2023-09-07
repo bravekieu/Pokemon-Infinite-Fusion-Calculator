@@ -722,10 +722,11 @@ function typeId(ftype) {
 //Custom sprite fusion function
 function showFusion(elementId, fusionId, elementFusionId){
     
-    fusionUrl = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/" + fusionId;
+    fusionUrl = "/type/Battlers/" + fusionId;
     document.getElementById(elementId).title = fusionId;
 
     if(doesImageExists(fusionUrl)){
+
         document.getElementById(elementId).src = fusionUrl;
         document.getElementById(elementFusionId).style.color = "green";
     }
@@ -837,7 +838,7 @@ function showShinies(randomHead, randomBody){
     document.getElementById("fusionid1").innerHTML = " (" + (headId + 1) + "." + (bodyId + 1) + ")"
     document.getElementById("fusionid1").style.color = "green";
 
-    picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "." + (bodyId+1) + ".png";
+    picShinySrc = "/type/Battlers/(headId+1)" + (headId+1) + "." + (bodyId+1) + ".png";
 
     if (!doesImageExists(picShinySrc)) {
         picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
