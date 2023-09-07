@@ -604,8 +604,8 @@ function fuseBothPoke(){
     }
 
     for (var i = 0; i < typeName.length; i++) {
-        var image = new Image()
-        image.src = "types/" + typeName[i] + ".png";
+        var image = new Image();
+        image.src = "types/Battlers/" + typeName[i] + ".png";
         
         if (result1[i] == 4) {
             document.getElementById("weak14").appendChild(image);
@@ -636,7 +636,7 @@ function fuseBothPoke(){
 
     for (var i = 0; i < typeName.length; i++) {
         var image = new Image();
-        image.src = "types/" + typeName[i] + ".png";
+        image.src = "types/Battlers/" + typeName[i] + ".png";
 
         if (result2[i] == 4) {
             document.getElementById("weak24").appendChild(image);
@@ -838,10 +838,10 @@ function showShinies(randomHead, randomBody){
     document.getElementById("fusionid1").innerHTML = " (" + (headId + 1) + "." + (bodyId + 1) + ")"
     document.getElementById("fusionid1").style.color = "green";
 
-    picShinySrc = "/type/Battlers/(headId+1)" + (headId+1) + "." + (bodyId+1) + ".png";
+    picShinySrc = "/type/Battlers/(headId+1)/" + (headId+1) + "." + (bodyId+1) + ".png";
 
     if (!doesImageExists(picShinySrc)) {
-        picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
+        picShinySrc = "/type/Battlers/(headId+1)/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
         document.getElementById("fusionid1").style.color = "red";
     }
 
