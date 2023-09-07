@@ -838,10 +838,10 @@ function showShinies(randomHead, randomBody){
     document.getElementById("fusionid1").innerHTML = " (" + (headId + 1) + "." + (bodyId + 1) + ")"
     document.getElementById("fusionid1").style.color = "green";
 
-    picShinySrc = "/type/Battlers/(headId+1)/" + (headId+1) + "." + (bodyId+1) + ".png";
+    picShinySrc = "/types/Battlers/(headId+1)/" + (headId+1) + "." + (bodyId+1) + ".png";
 
     if (!doesImageExists(picShinySrc)) {
-        picShinySrc = "/type/Battlers/(headId+1)/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
+        picShinySrc = "/types/Battlers/(headId+1)/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
         document.getElementById("fusionid1").style.color = "red";
     }
 
