@@ -722,7 +722,7 @@ function typeId(ftype) {
 //Custom sprite fusion function
 function showFusion(elementId, fusionId, elementFusionId){
     
-    fusionUrl = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/" + fusionId;
+    fusionUrl = "https://raw.githubusercontent.com/Aegide/custom-fusion-sprites/main/CustomBattlers/" + fusionId;
     document.getElementById(elementId).title = fusionId;
 
     if(doesImageExists(fusionUrl)){
@@ -837,7 +837,7 @@ function showShinies(randomHead, randomBody){
     document.getElementById("fusionid1").innerHTML = " (" + (headId + 1) + "." + (bodyId + 1) + ")"
     document.getElementById("fusionid1").style.color = "green";
 
-    picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "." + (bodyId+1) + ".png";
+    picShinySrc = "https://raw.githubusercontent.com/Aegide/custom-fusion-sprites/main/CustomBattlers/" + (headId+1) + "." + (bodyId+1) + ".png";
 
     if (!doesImageExists(picShinySrc)) {
         picShinySrc = "https://raw.githubusercontent.com/Aegide/autogen-fusion-sprites/master/Battlers/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
