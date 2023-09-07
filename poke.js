@@ -840,7 +840,7 @@ function showShinies(randomHead, randomBody){
     picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "." + (bodyId+1) + ".png";
 
     if (!doesImageExists(picShinySrc)) {
-        picShinySrc = "https://raw.githubusercontent.com/Aegide/autogen-fusion-sprites/master/Battlers/" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
+        picShinySrc = "https://gitlab.com/infinitefusion/sprites/-/raw/master/Battlers/(headId+1)" + (headId+1) + "/" + (headId+1) + "." + (bodyId+1) + ".png";
         document.getElementById("fusionid1").style.color = "red";
     }
 
