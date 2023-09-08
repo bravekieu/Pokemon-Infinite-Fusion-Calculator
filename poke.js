@@ -722,7 +722,7 @@ function typeId(ftype) {
 //Custom sprite fusion function
 function showFusion(elementId, fusionId, elementFusionId){
     
-    fusionUrl = "/type/Battlers/" + fusionId;
+    fusionUrl = "/types/Battlers/" + fusionId;
     document.getElementById(elementId).title = fusionId;
 
     if(doesImageExists(fusionUrl)){
