@@ -605,7 +605,7 @@ function fuseBothPoke(){
 
     for (var i = 0; i < typeName.length; i++) {
         var image = new Image();
-        image.src = "types/Battlers/" + typeName[i] + ".png";
+        image.src = "/types/battlers/" + typeName[i] + ".png";
         
         if (result1[i] == 4) {
             document.getElementById("weak14").appendChild(image);
